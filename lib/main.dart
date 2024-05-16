@@ -23,33 +23,53 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blueGrey,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: () {},
           ),
         ],
       ),
       backgroundColor: Colors.white,
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Icon(Icons.person_outlined, size: 150.0, color: Colors.blueGrey),
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-                labelText: "Peso (kg)",
-                labelStyle: TextStyle(color: Colors.blueGrey)),
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
-          ),
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-                labelText: "Altura (cm)",
-                labelStyle: TextStyle(color: Colors.blueGrey)),
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
-          ),
-        ],
+      body:  SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Icon(Icons.person_outlined, size: 150.0, color: Colors.blueGrey),
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  labelText: "Peso (kg)",
+                  labelStyle: TextStyle(color: Colors.blueGrey)),
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
+            ),
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  labelText: "Altura (cm)",
+                  labelStyle: TextStyle(color: Colors.blueGrey)),
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
+            ),
+            Padding(
+              padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                child :Container(
+                    height: 50.0,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Calcular" , style: TextStyle(color: Colors.white, fontSize: 28.0)
+                        ,),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey,
+                      ),
+                    )
+                ),
+            ),
+            Text("OLA",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),)
+          ],
+        ),
       ),
     );
   }
