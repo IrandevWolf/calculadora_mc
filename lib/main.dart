@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Home(),
+    theme: ThemeData(
+      errorColor: Colors.red, // Define a cor do texto de erro para vermelho
+    ),
   ));
 }
 
@@ -31,8 +34,10 @@ class _HomeState extends State<Home> {
 
   void _calculate() {
     setState(() {
-      double weight = double.parse(weightController.text);
-      double height = double.parse(heightController.text) / 100;
+      double weight = double.parse(weightController.text.replaceAll(",", "."));
+      double height = double.parse(
+              heightController.text.replaceAll(",", "").replaceAll(",", ".")) /
+          100;
       double imc = weight / (height * height);
 
       if (imc < 18.6) {
@@ -67,69 +72,95 @@ class _HomeState extends State<Home> {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(00.0, 0.0, 00.0, 0.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const Icon(Icons.person_outlined,
-                    size: 150.0, color: Colors.blueGrey),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/imagens/fundo imc.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  //const Icon(Icons.person_outlined,
+                  // size: 300.0, color: Colors.cyanAccent),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
                       labelText: "Peso (kg)",
-                      labelStyle: TextStyle(color: Colors.blueGrey)),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
-                  controller: weightController,
-                  validator: (value) {
-                    if (value== null || value.isEmpty) {
-                      return "Insira seu Peso";
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                      labelStyle:
+                          TextStyle(color: Colors.cyanAccent, fontSize: 35.0),
+                      hintText: "use vírgula, ex: 70,500",
+                    ),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.cyanAccent, fontSize: 35.0),
+                    controller: weightController,
+
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Insira seu Peso (ex: 75,5)";
+                      }
+                      if (value.contains('.')) {
+                        return "Use vírgula  ex: 75,500";
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
                       labelText: "Altura (cm)",
-                      labelStyle: TextStyle(color: Colors.blueGrey)),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
-                  controller: heightController,
-                  validator: (value) {
-                    if (value== null || value.isEmpty) {
-                      return "Insira sua Altura!";
-                    }
-                    return null;
-                  },
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Container(
-                      height: 50.0,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _calculate();
-                          }
-                        },
-                        child: Text(
-                          "Calcular",
-                          style: TextStyle(color: Colors.white, fontSize: 28.0),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey,
-                        ),
-                      )),
-                ),
-                Text(
-                  _infoText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 28.0),
-                )
-              ],
+                      labelStyle: TextStyle(color: Colors.cyanAccent),
+                      hintText: "use vírgula, ex: 1,75",
+                    ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.cyanAccent,
+                      fontSize: 40.0,
+                    ),
+                    controller: heightController,
+
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Insira sua Altura (ex: 1,78)";
+                      }
+                      if (value.contains('.')) {
+                        return "Use vírgula não ponto ex: 1,78";
+                      }
+                      return null;
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 255.0, bottom: 255.0),
+                    child: Container(
+                        height: 50.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _calculate();
+                            }
+                          },
+                          child: Text(
+                            "Calcular",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 28.0),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.cyan,
+                          ),
+                        )),
+                  ),
+                  Text(
+                    _infoText,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.cyanAccent, fontSize: 28.0),
+                  )
+                ],
+              ),
             ),
           )),
     );
