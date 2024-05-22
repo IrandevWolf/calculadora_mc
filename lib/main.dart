@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Home(),
-    theme: ThemeData(
-      errorColor: Colors.red, // Define a cor do texto de erro para vermelho
-    ),
+
   ));
 }
 
@@ -85,8 +83,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  //const Icon(Icons.person_outlined,
-                  // size: 300.0, color: Colors.cyanAccent),
+
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
@@ -118,7 +115,7 @@ class _HomeState extends State<Home> {
                       hintText: "use vírgula, ex: 1,75",
                     ),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.cyanAccent,
                       fontSize: 40.0,
                     ),
